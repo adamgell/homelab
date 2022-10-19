@@ -20,5 +20,4 @@ netsh advfirewall firewall add rule name="SSL" dir=in action=allow protocol=TCP 
 @echo Enabling port for SQL Server Browser Service's 'Browse' Button
 netsh advfirewall firewall add rule name="SQL Browser" dir=in action=allow protocol=TCP localport=1434
 @echo Allowing Ping command
-netsh advfirewall firewall add rule name="ICMP Allow incoming V4 echo request" protocol=icmpv4:8,any dir=in 
-action=allow
+netsh advfirewall firewall add rule name="ICMP Allow incoming V4 echo request" protocol=icmpv4:8,any dir=in action=allow
