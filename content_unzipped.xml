@@ -1,0 +1,104 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xmap-content xmlns="urn:xmind:xmap:xmlns:content:2.0" xmlns:fo="http://www.w3.org/1999/XSL/Format" xmlns:svg="http://www.w3.org/2000/svg" xmlns:xhtml="http://www.w3.org/1999/xhtml" xmlns:xlink="http://www.w3.org/1999/xlink" version="2.0">
+  <sheet id="sheet1" timestamp="1736972400000">
+    <topic id="root1" structure-class="org.xmind.ui.map.unbalanced" timestamp="1736972400000">
+      <title>Daily Dog Training Checklist</title>
+      <children>
+        <topics type="attached">
+          <topic id="topic1" timestamp="1736972400001">
+            <title>Exercise &amp; Mental Stimulation</title>
+            <children>
+              <topics type="attached">
+                <topic id="topic1-1" timestamp="1736972400002">
+                  <title>Exercise your dog every day (Week 1 &amp; 2)</title>
+                </topic>
+                <topic id="topic1-2" timestamp="1736972400003">
+                  <title>Give your pup a chance to sniff while walking; let them "see" the world through their noses as much as their eyes (Week 2)</title>
+                </topic>
+              </topics>
+            </children>
+          </topic>
+          <topic id="topic2" timestamp="1736972400004">
+            <title>Basic Commands - Practice 4x Daily</title>
+            <children>
+              <topics type="attached">
+                <topic id="topic2-1" timestamp="1736972400005">
+                  <title>Practice "sit" four times each day (Week 1)</title>
+                </topic>
+                <topic id="topic2-2" timestamp="1736972400006">
+                  <title>Practice "down" four times each day (Week 1)</title>
+                </topic>
+                <topic id="topic2-3" timestamp="1736972400007">
+                  <title>Practice "stand" four times each day (Week 1)</title>
+                </topic>
+                <topic id="topic2-4" timestamp="1736972400008">
+                  <title>Keep practicing "puppy push-up" exercises (the "sit, down, stand" combination) (Week 1 &amp; 2)</title>
+                </topic>
+                <topic id="topic2-5" timestamp="1736972400009">
+                  <title>Practice "attention" using the dog's name four times a day (Week 1 &amp; 2)</title>
+                </topic>
+              </topics>
+            </children>
+          </topic>
+          <topic id="topic3" timestamp="1736972400010">
+            <title>Walking &amp; Leash Training</title>
+            <children>
+              <topics type="attached">
+                <topic id="topic3-1" timestamp="1736972400011">
+                  <title>Practice "controlled walking" in your house for four or five steps, four times each day (Week 1)</title>
+                </topic>
+                <topic id="topic3-2" timestamp="1736972400012">
+                  <title>On walks, practice "red light/green light" and use the word "heel" when you start walking (Week 1)</title>
+                </topic>
+                <topic id="topic3-3" timestamp="1736972400013">
+                  <title>Start loosening the lead when heeling and increasing the number of steps (Week 2)</title>
+                </topic>
+                <topic id="topic3-4" timestamp="1736972400014">
+                  <title>Continue to use food to reward your dog for moving with you and use "red light/green light" if the dog tightens the lead (Week 2)</title>
+                </topic>
+                <topic id="topic3-5" timestamp="1736972400015">
+                  <title>Change direction often during walks/heeling practice (Week 2)</title>
+                </topic>
+              </topics>
+            </children>
+          </topic>
+          <topic id="topic4" timestamp="1736972400016">
+            <title>Advanced Commands</title>
+            <children>
+              <topics type="attached">
+                <topic id="topic4-1" timestamp="1736972400017">
+                  <title>Practice "settle" once or twice in the evening when you're watching TV (Week 1 &amp; 2)</title>
+                </topic>
+                <topic id="topic4-2" timestamp="1736972400018">
+                  <title>Teach "come fore" as demonstrated by your instructor; always on lead and always with lots of praise and treats (Week 2)</title>
+                </topic>
+                <topic id="topic4-3" timestamp="1736972400019">
+                  <title>Teach "stay" for a couple of seconds while the dog is sitting. Be sure you are kneeling on the floor, don't stand up, and don't move away (Week 2)</title>
+                </topic>
+              </topics>
+            </children>
+          </topic>
+          <topic id="topic5" timestamp="1736972400020">
+            <title>Environment &amp; Training Setup</title>
+            <children>
+              <topics type="attached">
+                <topic id="topic5-1" timestamp="1736972400021">
+                  <title>Puppy-proof your home (Week 1)</title>
+                </topic>
+                <topic id="topic5-2" timestamp="1736972400022">
+                  <title>Praise lavishly for any accomplishment and give treats (Week 1)</title>
+                </topic>
+                <topic id="topic5-3" timestamp="1736972400023">
+                  <title>Train away from home at least once (Week 2)</title>
+                </topic>
+                <topic id="topic5-4" timestamp="1736972400024">
+                  <title>Make sure everyone in the household uses the same commands (Week 2)</title>
+                </topic>
+              </topics>
+            </children>
+          </topic>
+        </topics>
+      </children>
+    </topic>
+  </sheet>
+</xmap-content>

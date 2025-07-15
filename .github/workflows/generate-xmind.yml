@@ -1,0 +1,54 @@
+name: Generate XMind Files
+
+on:
+  push:
+    paths:
+      - 'mindmaps/*.md'
+      - '.github/workflows/generate-xmind.yml'
+  workflow_dispatch:
+
+jobs:
+  generate-xmind:
+    runs-on: ubuntu-latest
+    
+    steps:
+    - name: Checkout repository
+      uses: actions/checkout@v3
+      
+    - name: Set up Python
+      uses: actions/setup-python@v4
+      with:
+        python-version: '3.9'
+        
+    - name: Install dependencies
+      run: |
+        python -m pip install --upgrade pip
+        pip install lxml
+        
+    - name: Generate XMind files
+      run: |
+        python scripts/generate_xmind.py
+        
+    - name: Create release artifacts
+      run: |
+        mkdir -p release
+        cd generated
+        for dir in */; do
+          if [ -d "$dir" ]; then
+            zip -r "../release/${dir%/}.xmind" "$dir"*
+          fi
+        done
+        
+    - name: Commit and push if changed
+      run: |
+        git config --global user.email "action@github.com"
+        git config --global user.name "GitHub Action"
+        git add -A
+        git diff --staged --quiet || git commit -m "Auto-generate XMind files"
+        git push
+        
+    - name: Upload artifacts
+      uses: actions/upload-artifact@v3
+      with:
+        name: xmind-files
+        path: release/*.xmind
