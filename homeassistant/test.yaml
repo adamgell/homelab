@@ -1,0 +1,97 @@
+type: sections
+max_columns: 4
+title: Testing
+path: testing
+sections:
+  - type: grid
+    cards:
+      - type: heading
+        heading: Motion
+        heading_style: title
+        icon: mdi:motion
+        grid_options:
+          columns: full
+          rows: 1
+      - type: custom:mushroom-template-card
+        primary: Office
+        secondary: >-
+          {% if is_state('binary_sensor.ewelink_snzb_03p_occupancy_2', 'on') %}
+            Occupied - Motion {{ 'Active' if is_state('binary_sensor.ewelink_snzb_03p_2', 'on') else 'Idle' }}
+          {% elif is_state('binary_sensor.ewelink_snzb_03p_occupancy_2',
+          'unavailable') %}
+            Sensor Unavailable
+          {% else %}
+            Empty - No Occupancy Detected
+          {% endif %}
+        icon: |-
+          {% if is_state('binary_sensor.ewelink_snzb_03p_2', 'on') %}
+            mdi:motion-sensor
+          {% else %}
+            mdi:account-off
+          {% endif %}
+        icon_color: |-
+          {% if is_state('binary_sensor.ewelink_snzb_03p_occupancy_2', 'on') %}
+            green
+          {% else %}
+            grey
+          {% endif %}
+        tap_action:
+          action: none
+        grid_options:
+          columns: full
+      - type: custom:mushroom-template-card
+        primary:  Laundry Room
+        secondary: >-
+          {% if is_state('binary_sensor.ewelink_snzb_03p_occupancy', 'on') %}
+            Occupied - Motion {{ 'Active' if is_state('binary_sensor.ewelink_snzb_03p', 'on') else 'Idle' }}
+          {% elif is_state('binary_sensor.ewelink_snzb_03p_occupancy',
+          'unavailable') %}
+            Sensor Unavailable
+          {% else %}
+            Empty - No Occupancy Detected
+          {% endif %}
+        icon: |-
+          {% if is_state('binary_sensor.ewelink_snzb_03p', 'on') %}
+            mdi:motion-sensor
+          {% else %}
+            mdi:account-off
+          {% endif %}
+        tap_action:
+          action: none
+        grid_options:
+          columns: full
+        color: |-
+          {% if is_state('binary_sensor.ewelink_snzb_03p_occupancy', 'on') %}
+            green
+          {% else %}
+            grey
+          {% endif %}
+        features_position: bottom
+      - type: custom:mushroom-template-card
+        primary:  Basement Stairs
+        secondary: >-
+          {% if is_state('binary_sensor.lumi_lumi_motion_ac02_occupancy', 'on') %}
+            Occupied - Motion {{ 'Active' if is_state('binary_sensor.lumi_lumi_motion_ac02', 'on') else 'Idle' }}
+          {% elif is_state('binary_sensor.lumi_lumi_motion_ac02_occupancy',
+          'unavailable') %}
+            Sensor Unavailable
+          {% else %}
+            Empty - No Occupancy Detected
+          {% endif %}
+        icon: |-
+          {% if is_state('binary_sensor.lumi_lumi_motion_ac02', 'on') %}
+            mdi:motion-sensor
+          {% else %}
+            mdi:account-off
+          {% endif %}
+        tap_action:
+          action: none
+        grid_options:
+          columns: full
+        color: |-
+          {% if is_state('binary_sensor.lumi_lumi_motion_ac02_occupancy', 'on') %}
+            green
+          {% else %}
+            grey
+          {% endif %}
+        features_position: bottom

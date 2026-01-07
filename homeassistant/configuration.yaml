@@ -1,0 +1,341 @@
+# Loads default set of integrations. Do not remove.
+default_config:
+
+# Load frontend themes from the themes folder
+frontend:
+  themes: !include_dir_merge_named themes
+
+automation: !include automations.yaml
+script: !include scripts.yaml
+scene: !include scenes.yaml
+
+lovelace:
+  resources:
+    - url: /hacsfiles/mushroom-strategy/mushroom-strategy.js
+      type: module
+    - url: /local/homed-zigbee-networkmap.js?v=0.1.0
+      type: module
+
+mqtt:
+  sensor:
+    - name: HOMEd Zigbee Networkmap
+      object_id: homed_zigbee_networkmap
+      state_topic: homed/status/zigbee
+      # again, if you change state_topic of HOMEd Zigbee, change json_attributes_topic accordingly
+      json_attributes_topic: homed/status/zigbee
+      json_attributes_template: "{{ value_json | tojson }}"
+      value_template: >-
+        {{ now().strftime('%Y-%m-%d %H:%M:%S') }}
+
+template:
+  - sensor:
+      - name: "Tucker Age"
+        unique_id: tucker_age
+        state: >
+          {% set birth_date = state_attr('sensor.anniversary_tucker_birthday', 'date') %}
+          {% if birth_date %}
+            {% set now_dt = now() %}
+            
+            {% set years = now_dt.year - birth_date.year %}
+            {% set months = now_dt.month - birth_date.month %}
+            {% set days = now_dt.day - birth_date.day %}
+            {% set hours = now_dt.hour - birth_date.hour %}
+            {% set minutes = now_dt.minute - birth_date.minute %}
+            
+            {% if minutes < 0 %}
+              {% set hours = hours - 1 %}
+              {% set minutes = minutes + 60 %}
+            {% endif %}
+            
+            {% if hours < 0 %}
+              {% set days = days - 1 %}
+              {% set hours = hours + 24 %}
+            {% endif %}
+            
+            {% if days < 0 %}
+              {% set months = months - 1 %}
+              {% set days_in_prev_month = ((now_dt.replace(day=1) - timedelta(days=1)).day) %}
+              {% set days = days + days_in_prev_month %}
+            {% endif %}
+            
+            {% if months < 0 %}
+              {% set years = years - 1 %}
+              {% set months = months + 12 %}
+            {% endif %}
+            
+            {% if years > 0 %}
+              {{ years }} year{{ 's' if years != 1 else '' }}, {{ months }} month{{ 's' if months != 1 else '' }}, {{ days }} day{{ 's' if days != 1 else '' }}
+            {% elif months > 0 %}
+              {{ months }} month{{ 's' if months != 1 else '' }}, {{ days }} day{{ 's' if days != 1 else '' }}, {{ hours }} hour{{ 's' if hours != 1 else '' }}
+            {% elif days > 0 %}
+              {{ days }} day{{ 's' if days != 1 else '' }}, {{ hours }} hour{{ 's' if hours != 1 else '' }}, {{ minutes }} minute{{ 's' if minutes != 1 else '' }}
+            {% else %}
+              {{ hours }} hour{{ 's' if hours != 1 else '' }}, {{ minutes }} minute{{ 's' if minutes != 1 else '' }}
+            {% endif %}
+          {% else %}
+            unavailable
+          {% endif %}
+        icon: mdi:dog
+        attributes:
+          years: >
+            {% set birth_date = state_attr('sensor.anniversary_tucker_birthday', 'date') %}
+            {% if birth_date %}
+              {% set now_dt = now() %}
+              {% set years = now_dt.year - birth_date.year %}
+              {% if now_dt.month < birth_date.month or (now_dt.month == birth_date.month and now_dt.day < birth_date.day) %}
+                {% set years = years - 1 %}
+              {% endif %}
+              {{ years }}
+            {% else %}
+              0
+            {% endif %}
+          months: >
+            {% set birth_date = state_attr('sensor.anniversary_tucker_birthday', 'date') %}
+            {% if birth_date %}
+              {% set now_dt = now() %}
+              {% set months = now_dt.month - birth_date.month %}
+              {% if now_dt.day < birth_date.day %}
+                {% set months = months - 1 %}
+              {% endif %}
+              {% if months < 0 %}
+                {% set months = months + 12 %}
+              {% endif %}
+              {{ months }}
+            {% else %}
+              0
+            {% endif %}
+          total_days: >
+            {% set birth_date = state_attr('sensor.anniversary_tucker_birthday', 'date') %}
+            {% if birth_date %}
+              {% set now_dt = now() %}
+              {% set diff = now_dt - birth_date %}
+              {{ (diff.total_seconds() // 86400) | int }}
+            {% else %}
+              0
+            {% endif %}
+          short_age: >
+            {% set birth_date = state_attr('sensor.anniversary_tucker_birthday', 'date') %}
+            {% if birth_date %}
+              {% set now_dt = now() %}
+              {% set years = now_dt.year - birth_date.year %}
+              {% if now_dt.month < birth_date.month or (now_dt.month == birth_date.month and now_dt.day < birth_date.day) %}
+                {% set years = years - 1 %}
+              {% endif %}
+              {% set months = now_dt.month - birth_date.month %}
+              {% if now_dt.day < birth_date.day %}
+                {% set months = months - 1 %}
+              {% endif %}
+              {% if months < 0 %}
+                {% set months = months + 12 %}
+              {% endif %}
+              {{ years }}y {{ months }}m
+            {% else %}
+              N/A
+            {% endif %}
+            
+      - name: "Lily Age"
+        unique_id: lily_age
+        state: >
+          {% set birth_date = state_attr('sensor.anniversary_lily_birthday', 'date') %}
+          {% if birth_date %}
+            {% set now_dt = now() %}
+            
+            {% set years = now_dt.year - birth_date.year %}
+            {% set months = now_dt.month - birth_date.month %}
+            {% set days = now_dt.day - birth_date.day %}
+            {% set hours = now_dt.hour - birth_date.hour %}
+            {% set minutes = now_dt.minute - birth_date.minute %}
+            
+            {% if minutes < 0 %}
+              {% set hours = hours - 1 %}
+              {% set minutes = minutes + 60 %}
+            {% endif %}
+            
+            {% if hours < 0 %}
+              {% set days = days - 1 %}
+              {% set hours = hours + 24 %}
+            {% endif %}
+            
+            {% if days < 0 %}
+              {% set months = months - 1 %}
+              {% set days_in_prev_month = ((now_dt.replace(day=1) - timedelta(days=1)).day) %}
+              {% set days = days + days_in_prev_month %}
+            {% endif %}
+            
+            {% if months < 0 %}
+              {% set years = years - 1 %}
+              {% set months = months + 12 %}
+            {% endif %}
+            
+            {% if years > 0 %}
+              {{ years }} year{{ 's' if years != 1 else '' }}, {{ months }} month{{ 's' if months != 1 else '' }}, {{ days }} day{{ 's' if days != 1 else '' }}
+            {% elif months > 0 %}
+              {{ months }} month{{ 's' if months != 1 else '' }}, {{ days }} day{{ 's' if days != 1 else '' }}, {{ hours }} hour{{ 's' if hours != 1 else '' }}
+            {% elif days > 0 %}
+              {{ days }} day{{ 's' if days != 1 else '' }}, {{ hours }} hour{{ 's' if hours != 1 else '' }}, {{ minutes }} minute{{ 's' if minutes != 1 else '' }}
+            {% else %}
+              {{ hours }} hour{{ 's' if hours != 1 else '' }}, {{ minutes }} minute{{ 's' if minutes != 1 else '' }}
+            {% endif %}
+          {% else %}
+            unavailable
+          {% endif %}
+        icon: mdi:cat
+        attributes:
+          years: >
+            {% set birth_date = state_attr('sensor.anniversary_lily_birthday', 'date') %}
+            {% if birth_date %}
+              {% set now_dt = now() %}
+              {% set years = now_dt.year - birth_date.year %}
+              {% if now_dt.month < birth_date.month or (now_dt.month == birth_date.month and now_dt.day < birth_date.day) %}
+                {% set years = years - 1 %}
+              {% endif %}
+              {{ years }}
+            {% else %}
+              0
+            {% endif %}
+          months: >
+            {% set birth_date = state_attr('sensor.anniversary_lily_birthday', 'date') %}
+            {% if birth_date %}
+              {% set now_dt = now() %}
+              {% set months = now_dt.month - birth_date.month %}
+              {% if now_dt.day < birth_date.day %}
+                {% set months = months - 1 %}
+              {% endif %}
+              {% if months < 0 %}
+                {% set months = months + 12 %}
+              {% endif %}
+              {{ months }}
+            {% else %}
+              0
+            {% endif %}
+          total_days: >
+            {% set birth_date = state_attr('sensor.anniversary_lily_birthday', 'date') %}
+            {% if birth_date %}
+              {% set now_dt = now() %}
+              {% set diff = now_dt - birth_date %}
+              {{ (diff.total_seconds() // 86400) | int }}
+            {% else %}
+              0
+            {% endif %}
+          short_age: >
+            {% set birth_date = state_attr('sensor.anniversary_lily_birthday', 'date') %}
+            {% if birth_date %}
+              {% set now_dt = now() %}
+              {% set years = now_dt.year - birth_date.year %}
+              {% if now_dt.month < birth_date.month or (now_dt.month == birth_date.month and now_dt.day < birth_date.day) %}
+                {% set years = years - 1 %}
+              {% endif %}
+              {% set months = now_dt.month - birth_date.month %}
+              {% if now_dt.day < birth_date.day %}
+                {% set months = months - 1 %}
+              {% endif %}
+              {% if months < 0 %}
+                {% set months = months + 12 %}
+              {% endif %}
+              {{ years }}y {{ months }}m
+            {% else %}
+              N/A
+            {% endif %}
+      - name: "Calli Age"
+        unique_id: calli_age
+        state: >
+          {% set birth_date = state_attr('sensor.anniversary_calli_birthday', 'date') %}
+          {% if birth_date %}
+            {% set now_dt = now() %}
+            
+            {% set years = now_dt.year - birth_date.year %}
+            {% set months = now_dt.month - birth_date.month %}
+            {% set days = now_dt.day - birth_date.day %}
+            {% set hours = now_dt.hour - birth_date.hour %}
+            {% set minutes = now_dt.minute - birth_date.minute %}
+            
+            {% if minutes < 0 %}
+              {% set hours = hours - 1 %}
+              {% set minutes = minutes + 60 %}
+            {% endif %}
+            
+            {% if hours < 0 %}
+              {% set days = days - 1 %}
+              {% set hours = hours + 24 %}
+            {% endif %}
+            
+            {% if days < 0 %}
+              {% set months = months - 1 %}
+              {% set days_in_prev_month = ((now_dt.replace(day=1) - timedelta(days=1)).day) %}
+              {% set days = days + days_in_prev_month %}
+            {% endif %}
+            
+            {% if months < 0 %}
+              {% set years = years - 1 %}
+              {% set months = months + 12 %}
+            {% endif %}
+            
+            {% if years > 0 %}
+              {{ years }} year{{ 's' if years != 1 else '' }}, {{ months }} month{{ 's' if months != 1 else '' }}, {{ days }} day{{ 's' if days != 1 else '' }}
+            {% elif months > 0 %}
+              {{ months }} month{{ 's' if months != 1 else '' }}, {{ days }} day{{ 's' if days != 1 else '' }}, {{ hours }} hour{{ 's' if hours != 1 else '' }}
+            {% elif days > 0 %}
+              {{ days }} day{{ 's' if days != 1 else '' }}, {{ hours }} hour{{ 's' if hours != 1 else '' }}, {{ minutes }} minute{{ 's' if minutes != 1 else '' }}
+            {% else %}
+              {{ hours }} hour{{ 's' if hours != 1 else '' }}, {{ minutes }} minute{{ 's' if minutes != 1 else '' }}
+            {% endif %}
+          {% else %}
+            unavailable
+          {% endif %}
+        icon: mdi:cat
+        attributes:
+        years: >
+          {% set birth_date = state_attr('sensor.anniversary_calli_birthday', 'date') %}
+          {% if birth_date %}
+            {% set now_dt = now() %}
+            {% set years = now_dt.year - birth_date.year %}
+            {% if now_dt.month < birth_date.month or (now_dt.month == birth_date.month and now_dt.day < birth_date.day) %}
+              {% set years = years - 1 %}
+            {% endif %}
+            {{ years }}
+          {% else %}
+            0
+          {% endif %}
+        months: >
+          {% set birth_date = state_attr('sensor.anniversary_calli_birthday', 'date') %}
+          {% if birth_date %}
+            {% set now_dt = now() %}
+            {% set months = now_dt.month - birth_date.month %}
+            {% if now_dt.day < birth_date.day %}
+              {% set months = months - 1 %}
+            {% endif %}
+            {% if months < 0 %}
+              {% set months = months + 12 %}
+            {% endif %}
+            {{ months }}
+          {% else %}
+            0
+          {% endif %}
+        total_days: >
+          {% set birth_date = state_attr('sensor.anniversary_calli_birthday', 'date') %}
+          {% if birth_date %}
+            {% set now_dt = now() %}
+            {% set diff = now_dt - birth_date %}
+            {{ (diff.total_seconds() // 86400) | int }}
+          {% else %}
+            0
+          {% endif %}
+        short_age: >
+          {% set birth_date = state_attr('sensor.anniversary_calli_birthday', 'date') %}
+          {% if birth_date %}
+            {% set now_dt = now() %}
+            {% set years = now_dt.year - birth_date.year %}
+            {% if now_dt.month < birth_date.month or (now_dt.month == birth_date.month and now_dt.day < birth_date.day) %}
+              {% set years = years - 1 %}
+            {% endif %}
+            {% set months = now_dt.month - birth_date.month %}
+            {% if now_dt.day < birth_date.day %}
+              {% set months = months - 1 %}
+            {% endif %}
+            {% if months < 0 %}
+              {% set months = months + 12 %}
+            {% endif %}
+            {{ years }}y {{ months }}m
+          {% else %}
+            N/A
+          {% endif %}
